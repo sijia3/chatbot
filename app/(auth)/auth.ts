@@ -3,7 +3,11 @@ import NextAuth, { type DefaultSession } from "next-auth";
 import type { DefaultJWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
 import { DUMMY_PASSWORD } from "@/lib/constants";
-import { createGuestUser, getUser } from "@/lib/db/queries";
+import {
+  createGuestUser,
+  findOrCreateSsoUser,
+  getUser,
+} from "@/lib/db/queries";
 import { authConfig } from "./auth.config";
 
 export type UserType = "guest" | "regular";
@@ -67,6 +71,19 @@ export const {
         }
 
         return { ...user, type: "regular" };
+      },
+    }),
+    Credentials({
+      id: "sso",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        name: { label: "Name", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = String(credentials.email ?? "");
+        const name = String(credentials.name ?? "");
+        const [ssoUser] = await findOrCreateSsoUser(email, name);
+        return { ...ssoUser, type: "regular" };
       },
     }),
     Credentials({

@@ -27,10 +27,27 @@
       "Bash(curl -s http://localhost:3000/)",
       "Bash(curl -s https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-0da558b660674d28955434ce0f7fadd8' -d '{\"model\":\"qwen3-32b\",\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}],\"max_tokens\":50}')",
       "Bash(curl -s https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-0da558b660674d28955434ce0f7fadd8' -d '{\"model\":\"qwen3-32b\",\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}],\"max_tokens\":50,\"stream\":true,\"enable_thinking\":false}')",
-      "Bash(mkdir -p d:/my/chatbot/.claude/rules)"
+      "Bash(mkdir -p d:/my/chatbot/.claude/rules)",
+      "Bash(npx tsx *)",
+      "Bash(sleep 8 && cat /tmp/claude-background-tasks/btldc2q8r.output 2>/dev/null || cat C:/Users/065731/AppData/Local/Temp/claude/e--code-chatbot/eaea82aa-0bc1-4480-b769-9b8a12862ea0/tasks/btldc2q8r.output 2>/dev/null || echo \"Checking...\")",
+      "Read(//tmp/claude-background-tasks/**)",
+      "Bash(curl -v \"http://localhost:3000/api/auth/sso\")",
+      "Bash(curl -L -c /tmp/cookies.txt -b /tmp/cookies.txt -v \"http://localhost:3000/api/auth/sso\")",
+      "Bash(rm -f /tmp/cookies.txt)",
+      "Bash(curl -c /tmp/cookies.txt -b /tmp/cookies.txt -s -o /dev/null -D - \"http://localhost:3000/\")",
+      "Bash(curl -L -c /tmp/cookies.txt -b /tmp/cookies.txt -s -o /dev/null -D - \"http://localhost:3000/\")",
+      "Bash(curl -L -c /tmp/cookies.txt -b /tmp/cookies.txt -s -o /dev/null -D - \"http://localhost:3000/api/auth/sso\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/alirezarezvani/claude-code-tresor/main/skills/development/git-commit-helper/SKILL.md\")",
+      "Bash(gh api *)",
+      "WebSearch"
     ],
     "additionalDirectories": [
       "d:\\my\\chatbot\\.claude"
-    ]
+    ],
+    "permissions": {
+      "defaultMode": "bypassPermissions"
+    }
   }
 }

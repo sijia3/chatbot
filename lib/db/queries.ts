@@ -74,6 +74,34 @@ export async function createGuestUser() {
   }
 }
 
+export async function findOrCreateSsoUser(email: string, name: string) {
+  try {
+    const users = await getUser(email);
+
+    if (users.length > 0) {
+      const [existingUser] = users;
+      if (name && existingUser.name !== name) {
+        await db.update(user).set({ name }).where(eq(user.id, existingUser.id));
+      }
+      return [{ id: existingUser.id, email: existingUser.email }] as Pick<
+        User,
+        "id" | "email"
+      >[];
+    }
+
+    const password = generateHashedPassword(generateUUID());
+    return await db.insert(user).values({ email, password, name }).returning({
+      id: user.id,
+      email: user.email,
+    });
+  } catch (_error) {
+    throw new ChatbotError(
+      "bad_request:database",
+      "Failed to find or create SSO user"
+    );
+  }
+}
+
 export async function saveChat({
   id,
   userId,
