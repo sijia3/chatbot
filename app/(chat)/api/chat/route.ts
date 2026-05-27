@@ -238,8 +238,8 @@ export async function POST(request: Request) {
             const title = await titlePromise;
             dataStream.write({ type: "data-chat-title", data: title });
             updateChatTitleById({ chatId: id, title });
-          } catch (_) {
-            /* non-fatal */
+          } catch (error) {
+            console.error("Failed to generate chat title:", error);
           }
         }
       },

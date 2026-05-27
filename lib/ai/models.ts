@@ -1,9 +1,9 @@
 export const DEFAULT_CHAT_MODEL = "qwen3-32b";
 
 export const titleModel = {
-  id: "qwen-plus",
-  name: "Qwen Plus",
-  description: "Fast model for title generation",
+  id: "qwen3-32b",
+  name: "Qwen3 32B",
+  description: "Model for title generation",
 };
 
 export type ModelCapabilities = {
